@@ -1,8 +1,8 @@
-import express from 'express';
+import { Router } from 'express';
 import { Request, Response } from 'express-serve-static-core';
-import todoRoutes from './todo';
+import todoRoutes from './todo.route';
 
-const router : express.Router = express.Router();
+const router : Router = Router();
 router.get('/', (req: Request, res: Response) => {
   res.redirect('/todo');
 });
