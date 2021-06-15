@@ -12,7 +12,8 @@
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"],
       "@utils/*": ["utils/*"],
-      "@views/*": ["views/*"]
+      "@views/*": ["views/*"],
+      "@static/*": ["static/*"]
     },
   },
   "include": ["src/**/*"],
