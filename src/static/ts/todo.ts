@@ -1,4 +1,8 @@
-import "../scss/common.scss";
-import "../scss/todo.scss";
+import '../scss/common.scss';
+import '../scss/todo.scss';
+import TodoEditor from './todo/TodoEditor';
 
-console.log("hello World");
+window.onload = () => {
+  const app : TodoEditor = new TodoEditor();
+  app.init();
+};

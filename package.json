@@ -44,6 +44,7 @@
     "@routes": "dist/src/routes",
     "@utils": "dist/src/utils",
     "@static": "dist/src/static",
-    "@views": "dist/src/views"
+    "@views": "dist/src/views",
+    "@constant": "dist/src/constant"
   }
 }
