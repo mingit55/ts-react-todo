@@ -9,12 +9,15 @@ export default class TodoItem {
   isFinished: boolean;
 
   constructor(id: number, x: number, y: number) {
+    const angle: number = Math.trunc(Math.random() * 12) - 6;
+
     this.x = x;
     this.y = y;
     this.isFinished = false;
     this.elem = document.createElement('div');
     this.elem.classList.add('todo-item');
     this.elem.classList.add('todo-item--zoom-in');
+    this.elem.style.transform = `rotate(${angle}deg)`;
     this.elem.innerHTML = `<div class="todo-item__inner" contenteditable="true"></div>`;
     this.innerElem = this.elem.firstElementChild as HTMLElement;
     this.data = { id, content: '', created_at: new Date() };

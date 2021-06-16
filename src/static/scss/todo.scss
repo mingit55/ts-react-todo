@@ -43,12 +43,13 @@ body {
 .help-message {
   pointer-events: none;
   user-select: none;
-  font-size: 25px;
-  font-weight: bold;
-  color: #000000;
+  font-size: 35px;
+  color: #fff;
+  text-shadow: 1px 3px 2px #615c5c;
   position: absolute;
   left: 10px;
   top: 10px;
+  z-index: $pin-z-index + 10;
 }
 
 /**
