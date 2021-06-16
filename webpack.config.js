@@ -15,6 +15,7 @@ module.exports = {
   devtool: prod ? 'hidden-soure-map' : 'eval',
 
   target: 'node',
+  // 직접 작성하지 않은 파일은 번들링 X
   externals: [nodeExternals()],
 
   // 번들링을 시작할 파일
@@ -91,6 +92,8 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({ filename: 'static/css/main.css' }),
+
+    // 웹팩으로 nodemon 처럼 사용하기
     new NodemonPlugin({
       // 둘 이상의 항목을 지정할 경우 다시 시작할 출력 파일
       script: './dist/server.js',
