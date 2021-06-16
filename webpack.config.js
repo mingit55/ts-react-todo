@@ -84,7 +84,11 @@ module.exports = {
     inline: true,
     port: 3000,
     hot: true,
+    overlay: true,
     publicPath: "/",
+    onListening(server) {
+      console.log(server);
+    },
   },
 
   // 번들링 된 파일이 생성될 위치 설정
