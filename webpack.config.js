@@ -74,6 +74,13 @@ module.exports = {
           name: 'static/img/[hash]-[name].[ext]',
         },
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'static/fonts',
+        },
+      },
     ],
   },
 

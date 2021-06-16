@@ -46,11 +46,12 @@ body {
   z-index: $pin-z-index;
   width: 50px;
   height: 50px;
-  background-image: url('../img/pushpin.png');
+  background-image: url('../img/pin.png');
   background-size: 50px 50px;
   background-repeat: no-repeat;
   background-position: center;
   transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 /**
@@ -61,14 +62,22 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  z-index: $pin-z-index - 1;
+  z-index: $pin-z-index - 10;
   width: 300px;
   height: 350px;
   background-color: #fff;
   padding: 40px 20px 20px;
-  transform: translate(-50%, -50px) rotate(-6deg); // random -6~6deg
+  transform: rotate(-6deg); // random -6~6deg
   box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  transition: 0.25s transform;
+  font-family: 'SDMisaeng', sans-serif;
+  font-size: 23px;
 
+  &:hover {
+    transition: 0.5s transform;
+    transform: scale(1.2)!important;
+    z-index: $pin-z-index - 5;
+  }
   &::before {
     content: '';
     position: absolute;
@@ -77,10 +86,11 @@ body {
     transform: translateX(-50%);
     width: 50px;
     height: 50px;
-    background-image: url('../img/pushpin.png');
+    background-image: url('../img/pin.png');
     background-size: 50px 50px;
     background-repeat: no-repeat;
     background-position: center center;
+    cursor: pointer;
   }
   &__inner {
     width: 100%;
