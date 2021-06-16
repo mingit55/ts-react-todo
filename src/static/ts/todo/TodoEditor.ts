@@ -16,7 +16,7 @@ export default class TodoEditor {
   }
 
   get hasNoFinishedTodo(): boolean {
-    return this.todoList.some(v => !v.isFinished);
+    return this.todoList.some((v) => !v.isFinished);
   }
 
   init(): void {
@@ -24,7 +24,7 @@ export default class TodoEditor {
   }
 
   setMode(value: string): void {
-    switch(value) {
+    switch (value) {
       case 'normal':
         this.mode = 'normal';
         break;
@@ -46,26 +46,39 @@ export default class TodoEditor {
     });
 
     document.body.addEventListener('dblclick', (e: MouseEvent) => {
-      if(this.mode === 'add' || this.hasNoFinishedTodo) return;
+      if (this.mode === 'add' || this.hasNoFinishedTodo) return;
 
       const target = e.target as Element;
-      if(target.nodeName !== 'BODY') return;
+      if (target.nodeName !== 'BODY') return;
       this.setMode('add');
     });
 
     document.body.addEventListener('click', (e: MouseEvent) => {
-      if(this.mode === 'normal') return;
+      if (this.mode === 'normal') return;
 
       const target = e.target as Element;
-      if(target.nodeName !== 'BODY') return;
+      if (target.nodeName !== 'BODY') return;
 
       const x: number = e.clientX - 160;
       const y: number = e.clientY + 20;
-      const id: number = this.autoIncrementCounter++;
-      const todoItem: TodoItem = new TodoItem(id, x, y);
-      this.todoList.push(todoItem);
+      this.insertTodo(x, y);
 
       this.setMode('normal');
     });
+  }
+
+  insertTodo(x: number, y: number): void {
+    const id: number = this.autoIncrementCounter++;
+    const todoItem: TodoItem = new TodoItem(this, id, x, y);
+    this.todoList.push(todoItem);
+  }
+
+  deleteTodo(id: number): void {
+    const idx: number = this.todoList.findIndex((v: TodoItem) => v.data.id === id);
+    if(idx >= 0) {
+      const todo: TodoItem = this.todoList[idx];
+      todo.elem.remove();
+      this.todoList.splice(idx, 1);
+    }
   }
 }

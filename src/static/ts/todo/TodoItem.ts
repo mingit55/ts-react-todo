@@ -1,16 +1,20 @@
 import { Todo } from '@constant/todo.constant';
+import TodoEditor from './TodoEditor';
 
 export default class TodoItem {
+  editor: TodoEditor;
   elem: HTMLElement;
+  pinElem: HTMLElement;
   innerElem: HTMLElement;
   data: Todo;
   x: number;
   y: number;
   isFinished: boolean;
 
-  constructor(id: number, x: number, y: number) {
+  constructor(editor: TodoEditor, id: number, x: number, y: number) {
     const angle: number = Math.trunc(Math.random() * 12) - 6;
 
+    this.editor = editor;
     this.x = x;
     this.y = y;
     this.isFinished = false;
@@ -18,23 +22,28 @@ export default class TodoItem {
     this.elem.classList.add('todo-item');
     this.elem.classList.add('todo-item--zoom-in');
     this.elem.style.transform = `rotate(${angle}deg)`;
-    this.elem.innerHTML = `<div class="todo-item__inner" contenteditable="true"></div>`;
-    this.innerElem = this.elem.firstElementChild as HTMLElement;
+    this.elem.innerHTML = `<div class="todo-item__pin"></div><div class="todo-item__inner" contenteditable="true"></div>`;
+    this.pinElem = this.elem.querySelector('.todo-item__pin') as HTMLElement;
+    this.innerElem = this.elem.querySelector('.todo-item__inner') as HTMLElement;
     this.data = { id, content: '', created_at: new Date() };
-
-    this.eventInit();
+    
     this.setPosition(x, y);
     document.body.append(this.elem);
+    this.eventInit();
     this.innerElem.focus();
   }
 
   eventInit(): void {
     this.innerElem.addEventListener('keydown', (e: KeyboardEvent) => {
-      if(e.ctrlKey && e.keyCode === 13) {
+      if (e.ctrlKey && e.keyCode === 13) {
         this.isFinished = true;
         this.elem.classList.remove('todo-item--zoom-in');
         this.innerElem.contentEditable = 'false';
       }
+    });
+
+    this.pinElem.addEventListener('click', () => {
+      this.editor.deleteTodo(this.data.id);
     });
   }
 

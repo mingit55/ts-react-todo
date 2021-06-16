@@ -100,8 +100,7 @@ body {
     transform: scale(1.2)!important;
     z-index: $pin-z-index - 5;
   }
-  &::before {
-    content: '';
+  &__pin {
     position: absolute;
     left: 50%;
     top: -10px;
