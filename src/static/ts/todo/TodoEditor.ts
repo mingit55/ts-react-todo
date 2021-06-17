@@ -15,8 +15,8 @@ export default class TodoEditor {
     this.autoIncrementCounter = 1;
   }
 
-  get hasNoFinishedTodo(): boolean {
-    return this.todoList.some((v) => !v.isFinished);
+  get hasFocusedTodo(): boolean {
+    return this.todoList.some((v) => !v.isFocused);
   }
 
   init(): void {
@@ -46,7 +46,7 @@ export default class TodoEditor {
     });
 
     document.body.addEventListener('dblclick', (e: MouseEvent) => {
-      if (this.mode === 'add' || this.hasNoFinishedTodo) return;
+      if (this.mode === 'add' || this.hasFocusedTodo) return;
 
       const target = e.target as Element;
       if (target.nodeName !== 'BODY') return;
@@ -64,6 +64,7 @@ export default class TodoEditor {
       this.insertTodo(x, y);
 
       this.setMode('normal');
+      this.cursorPin.setVisible(false);
     });
   }
 
