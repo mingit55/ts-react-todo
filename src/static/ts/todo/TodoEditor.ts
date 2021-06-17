@@ -16,7 +16,7 @@ export default class TodoEditor {
   }
 
   get hasFocusedTodo(): boolean {
-    return this.todoList.some((v) => !v.isFocused);
+    return this.todoList.some((v) => v.isFocused);
   }
 
   init(): void {
